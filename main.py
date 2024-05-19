@@ -49,4 +49,4 @@ with open("poem.csv","w",newline="") as poem_file:
     for key in poem_dict:
         writer.writerow([key] + [poem_dict[key]])
 
-print(poem_dict)
+print(poem_dict.keys())
