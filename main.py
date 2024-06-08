@@ -42,7 +42,7 @@ for link in links:
                     driver.switch_to.window(windows)
                     break
             
-            sleep(2)
+            sleep(5)
 
             poet = driver.find_element(By.TAG_NAME,"h1")
             poet_name = poet.find_element(By.TAG_NAME,"a")
