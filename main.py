@@ -43,24 +43,8 @@ for link in links:
                     driver.switch_to.window(windows)
                     break
             
-#links = WebDriverWait(driver,10).until(
-#    expected_conditions.presence_of_all_elements_located((By.CLASS_NAME,"poetLink"))
-#)
 
-
-            poet = WebDriverWait(driver,10).until(
-                expected_conditions.presence_of_element_located((By.TAG_NAME,"h1"))
-            )
-
-            poet_name = WebDriverWait(driver,10).until(
-                expected_conditions.presence_of_element_located((By.TAG_NAME,"a"))
-            )
-
-            poem = WebDriverWait(driver,10).until(
-                expected_conditions.presence_of_element_located((By.CLASS_NAME,"poetShow"))
-            )
-
-
+            poet = driver.find_element(By.TAG_NAME,"h1")
             poet_name = poet.find_element(By.TAG_NAME,"a")
             poem = driver.find_element(By.CLASS_NAME,"poetShow")
 
