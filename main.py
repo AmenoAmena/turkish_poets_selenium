@@ -32,9 +32,8 @@ for link in links:
     try:
         current_window = driver.current_window_handle
         inner_link = link.get_attribute("innerHTML")
-        sleep(4)
+        sleep(2)
         if inner_link not in done_titles:
-            print(inner_link)
             link.click()
 
             all_windows = driver.window_handles
@@ -43,6 +42,7 @@ for link in links:
                     driver.switch_to.window(windows)
                     break
             
+            sleep(2)
 
             poet = driver.find_element(By.TAG_NAME,"h1")
             poet_name = poet.find_element(By.TAG_NAME,"a")
@@ -56,18 +56,26 @@ for link in links:
             sleep(2)
 
             driver.back()
-            print(done_titles)
+
     except:
-        print("not worked")
+        print(f"not worked: {inner_link}")
         continue
     
 sleep(2)
 
-                
-with open("poem.csv","w",newline="") as poem_file:
-    writer = csv.writer(poem_file, delimiter=",")
-    writer.writerow(["name"] + ["poem"])
-    for key in poem_dict:
-        writer.writerow([key] + [poem_dict[key]])
+new_poem_dict = {}
 
-print(poem_dict.keys())
+for key, value in poem_dict.items():
+    modified_key = key.lower().replace('ı', 'i').replace('ü', 'u').replace('ö','o').replace('ş','s').replace('ç','c').replace('ğ','g')
+    modified_value = value.lower().replace('ı', 'i').replace('ü', 'u').replace('ö','o').replace('ş','s').replace('ç','c').replace('ğ','g') if isinstance(value, str) else value
+    
+    new_poem_dict[modified_key] = modified_value
+
+                
+with open("poem.csv","w",newline="",encoding="utf-8") as poem_file:
+    writer = csv.writer(poem_file, delimiter=",")
+    writer.writerow(["name","poem"])
+    for key in new_poem_dict:
+        writer.writerow([key] + [new_poem_dict[key]])
+
+print(new_poem_dict.keys())
