@@ -19,7 +19,7 @@ links = WebDriverWait(driver,10).until(
     expected_conditions.presence_of_all_elements_located((By.CLASS_NAME,"poetLink"))
 )
 
-
+counter = 20
 
 done_titles = []
 
@@ -52,6 +52,7 @@ for link in links:
             poem_name = poem.find_element(By.TAG_NAME,"h1").get_attribute("innerHTML")
 
             poem_dict.update({f"{poem_name}":f"{poet_name_real}"})
+            counter -= 1
 
             sleep(2)
 
@@ -59,6 +60,7 @@ for link in links:
 
     except:
         print(f"not worked: {inner_link}")
+        counter -= 1
         continue
     
 sleep(2)
